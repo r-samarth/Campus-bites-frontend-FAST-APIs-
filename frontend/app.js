@@ -8,6 +8,7 @@ const state = {
   openOrderId: null,
 };
 
+const API_BASE_URL = (window.CAMPUS_BITES_API_URL || '').replace(/\/$/, '');
 const currency = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 });
 const $ = (selector) => document.querySelector(selector);
 
@@ -16,7 +17,7 @@ function escapeHtml(value) {
 }
 
 async function api(path, options = {}) {
-  const response = await fetch(path, {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers: { 'Content-Type': 'application/json', ...options.headers },
   });
