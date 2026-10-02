@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Order a good meal from a local favourite." />
+    <title>Campus Bites | Food ordering</title>
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#browse" aria-label="Campus Bites home">
+        <span class="brand-icon" aria-hidden="true">CB</span>
+        <span>campus bites</span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-button active" data-view="browse" type="button">Restaurants</button>
+        <button class="nav-button" data-view="orders" type="button">My orders <span class="order-count" id="orderCount">0</span></button>
+      </nav>
+      <button class="cart-button" id="cartJump" type="button" aria-label="Go to cart">
+        <span aria-hidden="true">🛒</span> Cart <span id="cartCount" class="cart-count">0</span>
+      </button>
+    </header>
+
+    <main class="page-wrap">
+      <section class="intro" id="intro">
+        <div>
+          <p class="small-label">A little good food goes a long way</p>
+          <h1>What sounds good today?</h1>
+          <p class="intro-copy">Find a nearby favourite and get lunch on its way.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=560&q=80" alt="Fresh lunch bowl with vegetables" />
+      </section>
+
+      <div class="notice hidden" id="notice" role="status"></div>
+
+      <section class="browse-layout" id="browseView">
+        <div class="main-column">
+          <div class="section-heading">
+            <div>
+              <p class="small-label">Around the neighbourhood</p>
+              <h2 id="browseTitle">Restaurants</h2>
+            </div>
+            <button class="back-button hidden" id="backToRestaurants" type="button">← All restaurants</button>
+          </div>
+          <div class="restaurant-tools" id="restaurantTools">
+            <label class="search-field"><span aria-hidden="true">⌕</span><input id="restaurantSearch" type="search" placeholder="Search restaurants" /></label>
+            <select id="cuisineFilter" aria-label="Filter by cuisine"><option value="">All cuisines</option></select>
+          </div>
+          <div class="restaurant-grid" id="restaurantList" aria-live="polite"></div>
+          <section class="menu-section hidden" id="menuSection">
+            <div class="menu-heading">
+              <div><p class="small-label" id="restaurantCuisine"></p><h3 id="restaurantName"></h3><p id="restaurantDescription"></p></div>
+              <div class="delivery-note" id="restaurantDelivery"></div>
+            </div>
+            <div id="menuList" class="menu-list"></div>
+          </section>
+        </div>
+
+        <aside class="cart-panel" id="cartPanel">
+          <div class="cart-heading"><div><p class="small-label">Ready when you are</p><h2>Your cart</h2></div><span class="cart-bag" aria-hidden="true">🥡</span></div>
+          <div id="cartItems" class="cart-items"><p class="muted-note">Your cart is empty. Pick something tasty.</p></div>
+          <div class="cart-total"><span>Food subtotal</span><strong id="cartSubtotal">₹0</strong></div>
+          <div class="cart-total"><span>Delivery fee</span><strong id="cartDeliveryFee">₹0</strong></div>
+          <div class="cart-total"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+          <form id="checkoutForm" class="checkout-form">
+            <label>Your name<input name="customer_name" required minlength="2" maxlength="120" placeholder="Name for the order" /></label>
+            <label>Phone number<input name="phone" type="tel" required minlength="7" maxlength="30" placeholder="Mobile number" /></label>
+            <label>Delivery address<textarea name="delivery_address" required minlength="5" maxlength="255" rows="2" placeholder="Where should we bring it?"></textarea></label>
+            <button class="primary-button" id="placeOrderButton" type="submit" disabled>Place order <span>→</span></button>
+          </form>
+        </aside>
+      </section>
+
+      <section class="orders-view hidden" id="ordersView">
+        <div class="section-heading"><div><p class="small-label">Your recent meals</p><h2>My orders</h2></div><button class="back-button" data-view="browse" type="button">← Back to restaurants</button></div>
+        <div id="ordersList" class="orders-list"></div>
+      </section>
+
+      <footer class="page-footer"><span>Campus Bites</span><span>Good food, close by.</span></footer>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
