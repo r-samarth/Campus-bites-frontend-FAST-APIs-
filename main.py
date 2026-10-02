@@ -2,6 +2,7 @@ from pathlib import Path
 
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session, joinedload
 
@@ -20,6 +21,15 @@ app = FastAPI(
     description="A small restaurant, menu, and food ordering API.",
     version="1.0.0",
 )
+
+# The frontend is hosted separately on Vercel, so allow browser API requests.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 
